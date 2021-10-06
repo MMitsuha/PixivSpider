@@ -9,8 +9,6 @@
 #include <stdlib.h>
 #include <regex>
 #include <boost/log/trivial.hpp>
-#include <utf8h/utf8.h>
-#include <json/json.h>
 #include <mutex>
 #include <vector>
 #include <thread>
@@ -66,8 +64,8 @@ bool getSinglePicture(std::string url)
 
 		std::string utf8_response_html_string = utf8_response_html.str();
 
-		auto utf8_search_file_name_result = utf8str(utf8_response_html_string.c_str(), "\"illustTitle\":\"");
-		auto utf8_search_original_url_result = utf8str(utf8_response_html_string.c_str(), "\"original\":\"");
+		auto utf8_search_file_name_result = strstr(utf8_response_html_string.c_str(), "\"illustTitle\":\"");
+		auto utf8_search_original_url_result = strstr(utf8_response_html_string.c_str(), "\"original\":\"");
 		if (utf8_search_file_name_result && utf8_search_original_url_result)
 		{
 			std::string utf8_file_name;
